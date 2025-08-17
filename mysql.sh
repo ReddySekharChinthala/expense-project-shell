@@ -9,6 +9,9 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
+echo "Please enter DB password"
+read -s mysql_root_password
+
 VALIDATE(){
     if [ $1 -ne 0 ]
     then 
@@ -41,10 +44,10 @@ VALIDATE $? "Starting MySQL_Server"
 
 #Below code will use for idempotent in nature
 
-mysql -h db.rsdevops17.online -uroot -pExpenseApp@1 -e 'showdatabases;' &>>$LOGFILE
+mysql -h db.rsdevops17.online -uroot -p${mysql_root_password} -e 'showdatabases;' &>>$LOGFILE
 if [ $? -ne 0 ]
 then
-    mysql_secure_installation --set-root-pass ExpenseApp@1
+    mysql_secure_installation --set-root-pass ${mysql_root_password} &>>$LOGFILE
     VALIDATE $? "Setting up root password"
 else
     echo -e "MySQL root password already set $Y SKIPPING $N"
