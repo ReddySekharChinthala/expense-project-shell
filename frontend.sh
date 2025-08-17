@@ -46,7 +46,7 @@ cd /usr/share/nginx/html
 unzip /tmp/frontend.zip &>>$LOGFILE
 VALIDATE $? "Extracting code"
 
-cp /home/ec2-user/expense-project-shell/backend.service /etc/nginx/default.d/expense.conf &>>$LOGFILE
+cp /home/ec2-user/expense-project-shell/frontend.service /etc/nginx/default.d/expense.conf &>>$LOGFILE
 VALIDATE $? "Copying backend servive"
 
 systemctl restart nginx &>>$LOGFILE
