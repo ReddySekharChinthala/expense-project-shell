@@ -27,14 +27,14 @@ else
     echo "You are super user"
 fi
 
-dnf install nginx -y &>>$LOGFILE
+dnf remove nginx -y &>>$LOGFILE
 VALIDATE $? "Installing nginx"
 
-systemctl enable nginx &>>$LOGFILE
+systemctl disable nginx &>>$LOGFILE
 VALIDATE $? "Enabling nginx"
 
-systemctl start nginx &>>$LOGFILE
-VALIDATE $? "Starting nginx"
+# systemctl start nginx &>>$LOGFILE
+# VALIDATE $? "Starting nginx"
 
 # rm -rf /usr/share/nginx/html/* &>>$LOGFILE
 # VALIDATE $? "Removing existing contenet"

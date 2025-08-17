@@ -22,7 +22,7 @@ VALIDATE(){
     fi
 }
 
-if [ $? -ne 0 ]
+if [ $USERID -ne 0 ]
 then
     echo "Please run the script with root access"
     exit 1
