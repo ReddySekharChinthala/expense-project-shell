@@ -30,24 +30,24 @@ fi
 dnf install nginx -y &>>$LOGFILE
 VALIDATE $? "Installing nginx"
 
-systemctl enable nginx &>>$LOGFILE
-VALIDATE $? "Enabling nginx"
+# systemctl enable nginx &>>$LOGFILE
+# VALIDATE $? "Enabling nginx"
 
-systemctl start nginx &>>$LOGFILE
-VALIDATE $? "Starting nginx"
+# systemctl start nginx &>>$LOGFILE
+# VALIDATE $? "Starting nginx"
 
-rm -rf /usr/share/nginx/html/* &>>$LOGFILE
-VALIDATE $? "Removing existing contenet"
+# rm -rf /usr/share/nginx/html/* &>>$LOGFILE
+# VALIDATE $? "Removing existing contenet"
 
-curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>$LOGFILE
-VALIDATE $? "Downloading frontend code"
+# curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip &>>$LOGFILE
+# VALIDATE $? "Downloading frontend code"
 
-cd /usr/share/nginx/html
-unzip /tmp/frontend.zip &>>$LOGFILE
-VALIDATE $? "Extracting code"
+# cd /usr/share/nginx/html
+# unzip /tmp/frontend.zip &>>$LOGFILE
+# VALIDATE $? "Extracting code"
 
-cp /home/ec2-user/expense-project-shell/expense.conf /etc/nginx/default.d/expense.conf &>>$LOGFILE
-VALIDATE $? "Copying backend servive"
+# cp /home/ec2-user/expense-project-shell/expense.conf /etc/nginx/default.d/expense.conf &>>$LOGFILE
+# VALIDATE $? "Copying backend servive"
 
-systemctl restart nginx &>>$LOGFILE
-VALIDATE $? "Restart nginx"
+# systemctl restart nginx &>>$LOGFILE
+# VALIDATE $? "Restart nginx"
