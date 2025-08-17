@@ -9,6 +9,9 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
+echo "Please enter DB password"
+read -s mysql_root_password
+
 VALIDATE(){
     if [ $1 -ne 0 ]
     then
@@ -55,3 +58,24 @@ cd /app
 rm -rf /app/*
 unzip /tmp/backend.zip &>>$LOGFILE
 VALIDATE $? "Extracting code"
+
+npm install &>>$LOGFILE
+VALIDATE $? "Installing dependences"
+
+systemctl daemon-reload &>>$LOGFILE
+VALIDATE $? "re-load the service"
+
+systemctl start backend &>>$LOGFILE
+VALIDATE $? "Starting backed service"
+
+systemctl enable backend &>>$LOGFILE
+VALIDATE $? "Enabling backed"
+
+dnf install mysql -y &>>$LOGFILE
+VALIDATE $? "Installing MySQL client"
+
+mysql -h db.rsdevops17.online -uroot -p${mysql_root_password} < /app/schema/backend.sql
+VALIDATE $? "Schema loading"
+
+systemctl restart backend &>>$LOGFILE
+VALIDATE $? "Restarting backed"
