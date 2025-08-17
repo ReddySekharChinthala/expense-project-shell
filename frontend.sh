@@ -33,6 +33,9 @@ VALIDATE $? "Installing nginx"
 systemctl enable nginx &>>$LOGFILE
 VALIDATE $? "Enable nginx"
 
+nginx -t &>>$LOGFILE
+VALIDATE $? "Nginx configuration test"
+
 systemctl start nginx &>>$LOGFILE
 VALIDATE $? "Starting nginx"
 
