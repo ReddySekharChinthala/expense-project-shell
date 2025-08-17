@@ -31,10 +31,10 @@ dnf module reset nodejs -y &>>$LOGFILE
 VALIDATE $? "Disabling default nodejs version"
 
 dnf module enable nodejs:20 -y &>>$LOGFILE
-VALIDATE $? "Enabling nodejs:20 version"
+VALIDATE $? "enabling nodejs:20 version"
 
 dnf install nodejs -y &>>$LOGFILE
-VALIDATE $? "Installing nodejs"
+VALIDATE $? "installing nodejs"
 
 id expense &>>$LOGFILE
 if [ $? -ne 0 ]
