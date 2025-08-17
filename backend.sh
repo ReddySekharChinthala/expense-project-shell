@@ -27,7 +27,7 @@ else
     echo "You are super user"
 fi
 
-dnf module disable nodejs -y &>>$LOGFILE
+dnf module reset nodejs -y &>>$LOGFILE
 VALIDATE $? "Disabling default nodejs version"
 
 dnf module enable nodejs:20 -y &>>$LOGFILE
@@ -42,5 +42,5 @@ then
     useradd expense &>>$LOGFILE
     VALIDATE $? "adding user"
 else
-    echo -e "Expense user already created $Y SKIPPING $N"
+    echo -e "Expense user already created..$Y SKIPPING $N"
 fi
