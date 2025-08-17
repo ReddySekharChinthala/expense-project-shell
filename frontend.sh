@@ -28,10 +28,10 @@ else
 fi
 
 dnf remove nginx -y &>>$LOGFILE
-VALIDATE $? "Installing nginx"
+VALIDATE $? "removing nginx"
 
 systemctl disable nginx &>>$LOGFILE
-VALIDATE $? "Enabling nginx"
+VALIDATE $? "disable nginx"
 
 # systemctl start nginx &>>$LOGFILE
 # VALIDATE $? "Starting nginx"
