@@ -19,7 +19,7 @@ VALIDATE(){
     fi
 }
 
-if [ $? -ne 0 ]
+if [ $USERID -ne 0 ]
 then
     echo "Please run script with root access."
     exit 1
@@ -28,16 +28,16 @@ else
 fi
 
 
-dnf install mysql-server -y
+dnf install mysql-server -y &>>$LOGFILE
 VALIDATE $? "Installing MySql"
 
-systemctl enable mysqld
+systemctl enable mysqld &>>$LOGFILE
 VALIDATE $? "Enable MySQL-server"
 
-systemctl start mysqld
+systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "Starting MySQL-Server"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1
+mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
 VALIDATE $? "Setting up mysql root password"
 
 
