@@ -8,38 +8,36 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
+# echo "Please enter DB password:"
+# read -s mysql_root_password
 
 VALIDATE(){
-    if [ $1 -ne 0 ]
-    then
-        echo -e "$2...is $R FAILURE $N"
+   if [ $1 -ne 0 ]
+   then
+        echo -e "$2...$R FAILURE $N"
         exit 1
     else
-        echo -e "$2...is $G SUCCESS $N"
+        echo -e "$2...$G SUCCESS $N"
     fi
 }
 
 if [ $USERID -ne 0 ]
 then
-    echo "Please run script with root access."
-    exit 1
+    echo "Please run this script with root access."
+    exit 1 # manually exit if error comes.
 else
-    echo "Your are super user."
+    echo "You are super user."
 fi
 
 
 dnf install mysql-server -y &>>$LOGFILE
-VALIDATE $? "Installing MySql"
+VALIDATE $? "Installing MySQL Server"
 
 systemctl enable mysqld &>>$LOGFILE
-VALIDATE $? "Enable MySQL-server"
+VALIDATE $? "Enabling MySQL Server"
 
 systemctl start mysqld &>>$LOGFILE
-VALIDATE $? "Starting MySQL-Server"
+VALIDATE $? "Starting MySQL Server"
 
 mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
 VALIDATE $? "Setting up root password"
-
-
-
-
