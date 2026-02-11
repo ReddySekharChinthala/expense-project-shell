@@ -30,14 +30,15 @@ else
 fi
 
 
-dnf install mysql-server -y 
+dnf install mysql-server -y &>>$LOGFILE
 VALIDATE $? "Installing MySQL Server"
 
-systemctl enable mysqld 
+systemctl enable mysqld -y &>>$LOGFILE
 VALIDATE $? "Enabling MySQL Server"
 
-systemctl start mysqld 
+systemctl start mysqld -y &>>$LOGFILE
 VALIDATE $? "Starting MySQL Server"
 
 mysql_secure_installation --set-root-pass ExpenseApp@1 
 VALIDATE $? "Setting up root password"
+
