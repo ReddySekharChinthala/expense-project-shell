@@ -72,3 +72,12 @@ VALIDATE $? "Start backed service."
 
 systemctl enable backend &>>$LOGFILE
 VALIDATE $? "Enabling backend."
+
+dnf install mysql -y &>>$LOGFILE
+VALIDATE $? "Installing MYSQL Client." 
+
+mysql -h db.rsdevops17.online -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>$LOGFILE
+VALIDATE $? "Schema loading"
+
+systemctl restart backend &>>$LOGFILE
+VALIDATE $? "Restart backend"
