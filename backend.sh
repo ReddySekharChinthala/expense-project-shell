@@ -47,17 +47,18 @@ else
     echo -e "Expense user already created. $Y SKIPPING $N"
 fi
 
-mkdir -p /app
+mkdir -p /app &>>$LOGFILE
 VALIDATE $? "Creating directory."
 
-curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+curl -o /tmp/backend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip &>>$LOGFILE
 VALIDATE $? "Downloading the code."
 
 cd /app
-unzip /tmp/backend.zip
+unzip /tmp/backend.zip &>>$LOGFILE
 VALIDATE $? "Extract the code"
 
-npm install 
+npm install &>>$LOGFILE
 VALIDATE $? "Installing nodejs dependencies"
 
-cp /home/ec2-user/expense-project-shell /etc/systemd/system/backend.service
+cp /home/ec2-user/expense-project-shell /etc/systemd/system/backend.service &>>$LOGFILE
+VALIDATE $? "copy the backed configuration file"
