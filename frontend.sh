@@ -43,3 +43,9 @@ curl -o /tmp/frontend.zip https://expense-builds.s3.us-east-1.amazonaws.com/expe
 cd /usr/share/nginx/html
 unzip /tmp/frontend.zip &>>$LOGFILE
 VALIDATE $? "Extract the code" 
+
+cp /home/ec2-user/expense-project-shell/expense.conf /etc/nginx/default.d/expense.conf &>>$LOGFILE
+VALIDATE $? "Copy the expence conf file"
+
+systemctl restart nginx &>>$LOGFILE
+VALIDATE $? "Restart nginx"
