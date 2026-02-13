@@ -42,7 +42,7 @@ VALIDATE $? "Starting MySQL Server"
 # mysql_secure_installation --set-root-pass ExpenseApp@1 
 # VALIDATE $? "Setting up root password"
 
-mysql -h db.rsdevops17.online -uroot -pExpenseApp@1 -e 'showdatabases';
+mysql -h db.rsdevops17.online -uroot -pExpenseApp@1 -e 'showdatabases;'
 
 
 
