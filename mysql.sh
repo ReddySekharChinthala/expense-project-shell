@@ -43,6 +43,12 @@ VALIDATE $? "Starting MySQL Server"
 # VALIDATE $? "Setting up root password"
 
 mysql -h db.rsdevops17.online -uroot -pExpenseApp@1 -e 'show databases;'
-
+if [ $? -ne 0 ]
+then
+    mysql_secure_installation --set-root-pass ExpenseApp@1
+    VALIDATE $? "Setting up mysql root password"
+else
+    echo "MySQL root password is already setup..$Y SKIPPING $N"
+fi
 
 
