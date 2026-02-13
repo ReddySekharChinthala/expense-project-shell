@@ -42,10 +42,10 @@ VALIDATE $? "Starting MySQL Server"
 # mysql_secure_installation --set-root-pass ExpenseApp@1 
 # VALIDATE $? "Setting up root password"
 
-mysql -h db.rsdevops17.online -uroot -p${mysql_root_password} -e 'show databases;'
+mysql -h db.rsdevops17.online -uroot -p${mysql_root_password} -e 'show databases;' &>>$LOGFILE
 if [ $? -ne 0 ]
 then
-    mysql_secure_installation --set-root-pass ${mysql_root_password}
+    mysql_secure_installation --set-root-pass ${mysql_root_password} &>>$LOGFILE
     VALIDATE $? "Setting up mysql root password"
 else
     echo "MySQL root password is already setup..$Y SKIPPING $N"
